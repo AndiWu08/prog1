@@ -4,7 +4,7 @@
 #include "string.h"     // for strcat() -> concatenate strings
 
 int main() {
-    // define list of syllables
+    // define list of syllables; * means that syllables is a pointer to the location of the strings
     char *syllables[] = {"tan", "han", "klam", "ro", "ba", "lo"};
     
     // sizeof(syllables) gives total size in bytes (here 48)
@@ -13,7 +13,7 @@ int main() {
     // sizeof(syllables[0]) gives the size in bytes of the first string in syllables (here 8)
     int sizeSyl0 = sizeof(syllables[0]);
 
-    // calculate number of strings in syllables
+    // calculate number of strings in syllables (here 48/8=6)
     int numSyl = sizeSyl / sizeSyl0; 
     
 
@@ -44,5 +44,4 @@ int main() {
         // Output word#, letters, generated word 
         printf("Generated word #%02d has %2d letters: %s \n", wordNr,strlen(randWord) ,randWord);
     }
-    
 }
