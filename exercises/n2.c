@@ -30,8 +30,8 @@ int main() {
     // iterate 10 times and generate a word
     for (int wordNr = 1; wordNr <= 10; wordNr++)
     {
-        // define how many syllables the word has, between 1 and 5
-        int sizeRandWord = rand() % 5 + 1;
+        // define how many syllables the word has, between 2 and 5  % 4 = 0123 + 2 = 2345
+        int sizeRandWord = rand() % 4 + 2;
 
         char randWord[50] = "";
 
