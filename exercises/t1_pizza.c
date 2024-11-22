@@ -19,8 +19,8 @@ enum pizza_size {
     party_size
 };
 
-const char* pizza_type_names[] = {"Pizza Margherita", "Salami Classico", "Funghi", "Hawaiian Dream"};
-const char* pizza_size_names[] = {"Small", "Medium", "Large", "Extra Large", "XXL", "Party Size"};
+const char *pizza_type_names[] = {"Pizza Margherita", "Salami Classico", "Funghi", "Hawaiian Dream"};
+const char *pizza_size_names[] = {"Small", "Medium", "Large", "Extra Large", "XXL", "Party Size"};
 
 struct pizza_order
 {
@@ -28,53 +28,99 @@ struct pizza_order
     enum pizza_size size;
 };
 
+struct pizza_order all_pizza_orders[MAX_PIZZA_ORDER];
+
+int order_count;
+
 // function to choose pizza type, returns enum of pizza_type
 enum pizza_type choose_pizza_type() {
+    printf("\nAvailable pizza types: \n");
+
+    // size of entire array / size of first pointer = length of array
+    int av_types = sizeof(pizza_type_names) / sizeof(pizza_type_names[0]);
+
+    // show available options
+    for (int i = 0; i < av_types; i++)
+    {
+        printf("%d. %s \n",i, pizza_type_names[i]);
+    }
     
+    int ordered_type;
+
+    // ask for unput until a valid input is given
+    do
+    {
+        printf("Your choice: ");
+        scanf_s("%d", &ordered_type);
+    } while (ordered_type < 0 || ordered_type > av_types);
+
+    return ordered_type;
 }
 
 // function to choose pizza size, returns enum of pizza_size
 enum pizza_size choose_pizza_size() {
+    printf("\nAvailable pizza sizes: \n");
 
+    // size of entire array / size of first pointer = length of array
+    int av_sizes = sizeof(pizza_size_names) / sizeof(pizza_size_names[0]);
+
+    // show available options
+    for (int i = 0; i < av_sizes; i++)
+    {
+        printf("%d. %s \n",i, pizza_size_names[i]);
+    }
+    
+    // ask for unput until a valid input is given
+    int ordered_size;
+    do
+    {
+        printf("Your desired size: ");
+        scanf_s("%d", &ordered_size);
+    } while (ordered_size < 0 || ordered_size > av_sizes);
+    
+    return ordered_size;
 }
 
+
 int main() {
-    // 1. show welcome message
+    // show welcome message
     printf("Hello! Welcome to UASKPS! - University of Applied Sciences Kempten Pizza service!\n");
     printf("You can order up to %d pizzas.\n\n", MAX_PIZZA_ORDER);
 
-    struct pizza_order your_pizza_orders[MAX_PIZZA_ORDER];
-
     int order_count = 1;
-    char c;
+    char c = 'y';
 
-    do
+    while (c == 'y')
     {
-        printf("Please choose your pizza #%d \n", order_count);
+        printf("\nPlease choose your pizza #%d \n", order_count);
 
         // let user choose pizza type
+        enum pizza_type ordered_type = choose_pizza_type();
         
-
-
         //let user choose pizza size
-        
-        if (order_count > MAX_PIZZA_ORDER)
+        enum pizza_size ordered_size = choose_pizza_size();
+
+        // store order in list
+        all_pizza_orders[order_count-1].pizza = ordered_type;
+        all_pizza_orders[order_count-1].size = ordered_size;
+        order_count++;
+
+        if (order_count <= MAX_PIZZA_ORDER)
         {
-            printf("do you want to continue your order?\n");
+            printf("\ndo you want to continue your order? y/n\n");
             c = _getch();
         }
         else
         {
             c = 'n';
-        }
-
-    } while (c == 'y' || c == 'Y');
-    
-    // prints pizza orders
-    for (int i = 0; i < order_count; i++)
-    {
-        printf("%s %s \n", pizza_size_names[your_pizza_orders[i].size], pizza_type_names[your_pizza_orders[i].pizza]);
+        }    
     }
+
+    printf("\nHere is your complete order::\n");
+    for (int i = 0; i < order_count-1; i++)
+    {
+        printf("%s (%s) \n", pizza_type_names[all_pizza_orders[i].pizza], pizza_size_names[all_pizza_orders[i].size]);
+    }   
 
     return 0;
 }
