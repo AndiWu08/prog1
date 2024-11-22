@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <conio.h>
 
 #define MAX_PIZZA_ORDER 10
 
@@ -27,6 +28,15 @@ struct pizza_order
     enum pizza_size size;
 };
 
+// function to choose pizza type, returns enum of pizza_type
+enum pizza_type choose_pizza_type() {
+    
+}
+
+// function to choose pizza size, returns enum of pizza_size
+enum pizza_size choose_pizza_size() {
+
+}
 
 int main() {
     // 1. show welcome message
@@ -36,14 +46,31 @@ int main() {
     struct pizza_order your_pizza_orders[MAX_PIZZA_ORDER];
 
     int order_count = 1;
+    char c;
 
-    for (int i = 0; i < MAX_PIZZA_ORDER; i++)
+    do
     {
-        your_pizza_orders[i].pizza = funghi;
-        your_pizza_orders[i].size = large;
-        order_count++;
-    }
+        printf("Please choose your pizza #%d \n", order_count);
+
+        // let user choose pizza type
+        
+
+
+        //let user choose pizza size
+        
+        if (order_count > MAX_PIZZA_ORDER)
+        {
+            printf("do you want to continue your order?\n");
+            c = _getch();
+        }
+        else
+        {
+            c = 'n';
+        }
+
+    } while (c == 'y' || c == 'Y');
     
+    // prints pizza orders
     for (int i = 0; i < order_count; i++)
     {
         printf("%s %s \n", pizza_size_names[your_pizza_orders[i].size], pizza_type_names[your_pizza_orders[i].pizza]);
