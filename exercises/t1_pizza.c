@@ -3,20 +3,24 @@
 
 #define MAX_PIZZA_ORDER 10
 
+// last enum NR_PIZZA_TYPES operates as counter
 enum pizza_type {
     pizza_margherita,
     salami_classico,
     funghi,
-    hawaiian_dream
+    hawaiian_dream,
+    NR_PIZZA_TYPES
 };
 
+// last enum NR_PIZZA_SIZES operates as counter
 enum pizza_size {
     small,
     medium,
     large,
     extra_large,
     xxl,
-    party_size
+    party_size,
+    NR_PIZZA_SIZES
 };
 
 const char *pizza_type_names[] = {"Pizza Margherita", "Salami Classico", "Funghi", "Hawaiian Dream"};
@@ -37,10 +41,11 @@ enum pizza_type choose_pizza_type() {
     printf("\nAvailable pizza types: \n");
 
     // size of entire array / size of first pointer = length of array
+    // not necessary if NR_PIZZA_TYPES exists in enum
     int av_types = sizeof(pizza_type_names) / sizeof(pizza_type_names[0]);
 
     // show available options
-    for (int i = 0; i < av_types; i++)
+    for (int i = 0; i < NR_PIZZA_TYPES; i++)
     {
         printf("%d. %s \n",i, pizza_type_names[i]);
     }
@@ -52,7 +57,7 @@ enum pizza_type choose_pizza_type() {
     {
         printf("Your choice: ");
         scanf_s("%d", &ordered_type);
-    } while (ordered_type < 0 || ordered_type > av_types);
+    } while (ordered_type < 0 || ordered_type > NR_PIZZA_TYPES);
 
     return ordered_type;
 }
@@ -62,10 +67,11 @@ enum pizza_size choose_pizza_size() {
     printf("\nAvailable pizza sizes: \n");
 
     // size of entire array / size of first pointer = length of array
+    // not necessary if NR_PIZZA_SIZES exists in enum
     int av_sizes = sizeof(pizza_size_names) / sizeof(pizza_size_names[0]);
 
     // show available options
-    for (int i = 0; i < av_sizes; i++)
+    for (int i = 0; i < NR_PIZZA_SIZES; i++)
     {
         printf("%d. %s \n",i, pizza_size_names[i]);
     }
@@ -76,7 +82,7 @@ enum pizza_size choose_pizza_size() {
     {
         printf("Your desired size: ");
         scanf_s("%d", &ordered_size);
-    } while (ordered_size < 0 || ordered_size > av_sizes);
+    } while (ordered_size < 0 || ordered_size > NR_PIZZA_SIZES);
     
     return ordered_size;
 }
