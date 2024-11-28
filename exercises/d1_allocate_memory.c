@@ -13,6 +13,7 @@ int main() {
 
     printf("\nGenerating your array...\n");
     float *array = (float *)malloc(n * sizeof(float)); // Array of size 'n'
+    // float *array = malloc(n * sizeof(float)); // Array of size 'n'
 
     // check if allocation failed
     if (array == NULL)
