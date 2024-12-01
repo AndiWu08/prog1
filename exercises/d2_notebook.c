@@ -6,7 +6,7 @@
 int main() {
     // Allocate space for an array of one string pointer
     // all_notes is a pointer which references pointers to the string == single note
-    char** all_notes = malloc(sizeof(char*) * 1);
+    char **all_notes = malloc(sizeof(char*) * 1);
     if (all_notes == NULL) {
         fprintf(stderr, "Memory allocation failed.\n");
         return 1;
@@ -26,16 +26,14 @@ int main() {
 
         char c = _getch();
 
-        if (c == '3')
-        {
-            break;
-        }
-
         if (c == '1')
         {
             char new_note[100];
             printf("\nEnter your new note: \n");
             fgets(new_note, sizeof(new_note), stdin);
+
+            // Remove \n from the string
+            new_note[strcspn(new_note, "\n")] = '\0';
 
             // Allocate memory for the string with the size of the string 
             all_notes[nr_notes] = malloc(strlen(new_note) + 1);     // +1 for NULL terminator
@@ -59,14 +57,17 @@ int main() {
             printf("Notes stored so far: \n");
             for (int i = 0; i < nr_notes; i++)
             {
-                printf("Note #%d: %s ", i, all_notes[i]);
+                printf("Note #%d: %s \n", i, all_notes[i]);
             }
         }
         
-        
-    }
+        if (c == '3')
+        {
+            break;
+        }
+    } // end of while
 
-    // Free the allocated memory all string
+    // Free the allocated memory for all strings
     for (int i = 0; i < nr_notes; i++)
     {
         free(all_notes[i]);
