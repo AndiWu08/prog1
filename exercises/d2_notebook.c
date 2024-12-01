@@ -33,13 +33,14 @@ int main() {
 
         if (c == '1')
         {
-            char str[100];
+            char new_note[100];
             printf("\nEnter your new note: \n");
-            // DOESNT WORK
-            fgets(str, sizeof(str), stdin);
+            fgets(new_note, sizeof(new_note), stdin);
 
-            // Allocate memory for the string with the size of the string
-            all_notes[nr_notes] = malloc(strlen(str) + 1);
+            // Allocate memory for the string with the size of the string 
+            all_notes[nr_notes] = malloc(strlen(new_note) + 1);     // +1 for NULL terminator
+
+            // check if allocation failed
             if (all_notes[nr_notes] == NULL) {
                 fprintf(stderr, "Memory allocation for string failed.\n");
                 free(all_notes); // Free previously allocated memory
@@ -47,7 +48,7 @@ int main() {
             }
 
             // Copy a string into the allocated space
-            strcpy(all_notes[nr_notes], "Hello, world!");
+            strcpy(all_notes[nr_notes], new_note);
             nr_notes++;
         }
         
@@ -58,7 +59,7 @@ int main() {
             printf("Notes stored so far: \n");
             for (int i = 0; i < nr_notes; i++)
             {
-                printf("Note #%d: %s \n", i, all_notes[i]);
+                printf("Note #%d: %s ", i, all_notes[i]);
             }
         }
         
